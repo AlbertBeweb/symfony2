@@ -14,8 +14,8 @@ class ArticlesFixtures extends Fixture
         {
             $article = new Article();
             $article->setTitle("Titre de l'article n°$i")
-                    ->setContent("<p>Contenu de l'article n°$i</p>")
-                    ->setImage("http://placeholder.it/350x150")
+                    ->setContent("Contenu de l'article n°$i")
+                    ->setImage("https://via.placeholder.com/350x150/")
                     ->setCreateAt(new \DateTime());
 
             $manager->persist($article);

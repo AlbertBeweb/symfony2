@@ -2,16 +2,22 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Article;
+use App\Repository\ArticleRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BlogController extends AbstractController
 {
     /**
      * @Route("/blog", name="blog")
      */
-    public function index()
+    public function index(ArticleRepository $repository)
     {
+        $repository = $this->getDoctrine()->getRepository(Article::class);
+        
+        $articles = $repository->findAll();
+
         return $this->render('blog/index.html.twig', [
             //Permet d'afficher le nom du contrôlleur
             'controller_name' => 'BlogController',
@@ -20,14 +26,15 @@ class BlogController extends AbstractController
             //Variable pour le titre
             'title' => 'Blog',
             //Titre de l'application
-            'appName' => 'StarterKit Symfony 4'
+            'appName' => 'StarterKit Symfony 4',
+            'articles' => $articles,
         ]);
     }
 
     /**
-     * @Route("/blog/12", name="blog_show")
+     * @Route("/blog/{id}", name="blog_show")
      */
-    public function show()
+    public function show(Article $article)
     {
         return $this->render('blog/show.html.twig', [
             //Permet d'afficher le nom du contrôlleur
@@ -37,7 +44,9 @@ class BlogController extends AbstractController
             //Variable pour le titre
             'title' => 'Blog',
             //Titre de l'application
-            'appName' => 'StarterKit Symfony 4'
+            'appName' => 'StarterKit Symfony 4',
+            
+            'article' => $article,
         ]);
     }
 }
