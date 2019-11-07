@@ -17,7 +17,7 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
             //Permet d'avoir le link de la navbar en active
             'current_menu' => 'home',
-            //Variable pour le titre et l'onglet
+            //Variable pour le titre
             'title' => 'Home',
             //Titre de l'application
             'appName' => 'StarterKit Symfony 4'
