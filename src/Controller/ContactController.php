@@ -14,7 +14,7 @@ class ContactController extends AbstractController
     {
         return $this->render('contact/index.html.twig', [
             //Permet d'afficher le nom du contrôlleur
-            'controller_name' => 'AboutController',
+            'controller_name' => 'ContactController',
             //Permet d'avoir le link de la navbar en active
             'current_menu' => 'contact',
             //Variable pour le titre

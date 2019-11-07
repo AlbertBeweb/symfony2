@@ -14,7 +14,24 @@ class BlogController extends AbstractController
     {
         return $this->render('blog/index.html.twig', [
             //Permet d'afficher le nom du contrôlleur
-            'controller_name' => 'AboutController',
+            'controller_name' => 'BlogController',
+            //Permet d'avoir le link de la navbar en active
+            'current_menu' => 'blog',
+            //Variable pour le titre
+            'title' => 'Blog',
+            //Titre de l'application
+            'appName' => 'StarterKit Symfony 4'
+        ]);
+    }
+
+    /**
+     * @Route("/blog/12", name="blog_show")
+     */
+    public function show()
+    {
+        return $this->render('blog/show.html.twig', [
+            //Permet d'afficher le nom du contrôlleur
+            'controller_name' => 'BlogController',
             //Permet d'avoir le link de la navbar en active
             'current_menu' => 'blog',
             //Variable pour le titre
