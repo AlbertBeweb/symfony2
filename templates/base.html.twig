@@ -5,11 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="with=device-with, initial-scale=1">
         <meta name="keywords" content="">
-        <title>
-            {% block title %}
-                {{ title }}
-            {% endblock %}
-        </title>
+        <title>{% block title %}{{ title }} | {{ appName }}{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script src="https://kit.fontawesome.com/a3b4acdd6d.js" crossorigin="anonymous"></script>
         {% block stylesheets %}{% endblock %}

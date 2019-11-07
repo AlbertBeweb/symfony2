@@ -12,7 +12,8 @@ class HomeController extends AbstractController
      */
     public function index()
     {
-        return $this->render('home/index.html.twig', [
+        return $this->render('pages/home.html.twig', [
+            //Permet d'afficher le nom du contrôlleur
             'controller_name' => 'HomeController',
             //Permet d'avoir le link de la navbar en active
             'current_menu' => 'home',
