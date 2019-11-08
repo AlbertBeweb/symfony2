@@ -51,8 +51,19 @@
                 </form>
             </div>
         </div>
-
-<!-- Single Comment -->
+        {% if app.user %}
+        {{ form_start(commentForm) }}
+        {{ form_row(commentForm.author, {'attr': {'placeholder': "Votre nom"}}) }}
+        {{ form_row(commentForm.content, {'attr': {'placeholder': "Votre commentaire"}}) }}
+        <button type="submit" class="btn btn-success">Envoyer</button>
+        {{ form_end(commentForm) }}
+        {% else %}
+            <h2>Vous devez être connecter pour le commentaire</h2>
+            <a href="{{ path('security_login') }}" class="btn btn-primary">Connexion</a>
+        {% endif %}
+        <br><br>
+        <!-- Single Comment -->
+        <h1>{{ article.comments | length }} commentaires</h1>
         {% for comment in article.comments %}
             <div class="media mb-4">
                 <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
@@ -63,7 +74,7 @@
         </div>
         {% endfor %}
 
-
+        
         <!-- Comment with nested comments -->
         <div class="media mb-4">
             <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">

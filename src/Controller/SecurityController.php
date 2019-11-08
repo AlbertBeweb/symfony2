@@ -33,19 +33,46 @@ class SecurityController extends Controller
             $user->setCreateAt(new \DateTime());
             $manager->persist($user);
             $manager->flush();
+
+            return $this->redirectToRoute('security_login');
         }
         
 
         return $this->render('security/registration.html.twig', [
             'form' => $form->createView(),
             //Permet d'afficher le nom du contrôlleur
-            'controller_name' => 'HomeController',
+            'controller_name' => 'SecurityController',
             //Permet d'avoir le link de la navbar en active
-            'current_menu' => 'home',
+            'current_menu' => 'Connexion',
             //Variable pour le titre
-            'title' => 'Home',
+            'title' => 'Connexion',
             //Titre de l'application
             'appName' => 'StarterKit Symfony 4'
         ]);
+    }
+
+    /**
+     * @Route("/connexion", name="security_login")
+     */
+    public function login()
+    {
+        return $this->render('security/login.html.twig', [
+            //Permet d'afficher le nom du contrôlleur
+            'controller_name' => 'SecurityController',
+            //Permet d'avoir le link de la navbar en active
+            'current_menu' => 'connexion',
+            //Variable pour le titre
+            'title' => 'Connexion',
+            //Titre de l'application
+            'appName' => 'StarterKit Symfony 4'
+        ]);
+    }
+
+    /**
+     * @Route("/deconnexion", name="security_logout")
+     */
+    public function logout()
+    {
+        
     }
 }
