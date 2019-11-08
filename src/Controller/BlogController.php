@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -33,12 +35,41 @@ class BlogController extends AbstractController
 
     /**
      * @Route("/blog/new", name="blog_create")
+     * @Route("/blog/{id}/edit", name="blog_edit")
      */
-    public function create()
+    public function form(Article $article = null, Request $request, ObjectManager $manager)
     {
-        $article = new Article();
+        if(!$article)
+        {
+            $article = new Article();
+        }
+        
+        $form = $this->createFormBuilder($article)
+                     ->add('title')
+                     ->add('content')
+                     ->add('image')
+                     ->getForm();
+        
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid())
+        {
+            if(!$article->getId())
+            {
+
+                $article->setCreateAt(new \DateTime());
+            }
+
+            $manager->persist($article);
+            $manager->flush();
+
+            return $this->redirectToRoute('blog_show', ['id' => $article->getId()]);
+        }
 
         return $this->render('blog/create.html.twig', [
+            'editMode' => $article->getId() !== null,
+            //Permet de récupéré la vue du formulaire
+            'formArticle' => $form->createView(),
             //Permet d'afficher le nom du contrôlleur
             'controller_name' => 'BlogController',
             //Permet d'avoir le link de la navbar en active
