@@ -7,7 +7,13 @@
     {{ title }}
 {% endblock %}
 {% block body %}
-    <h1>Création d'un article</h1>
+    
+    {% if editMode %}
+        <h1>Modifier d'un article</h1>
+    {% else %}
+        <h1>Création d'un article</h1>
+    {% endif %}
+    
     {{ form_start(formArticle) }}
     {{ form_row(formArticle.title, {'attr': {'placeholder': "Titre de l'article"}}) }}
     {{ form_row(formArticle.content, {'attr': {'placeholder': "Contenu de l'article"}}) }}

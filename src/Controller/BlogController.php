@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -44,12 +45,17 @@ class BlogController extends AbstractController
             $article = new Article();
         }
         
+        /* 
+        Avec la commande php bin/console make:form Symfony crée
+        le fichier src/form/ArticleType
         $form = $this->createFormBuilder($article)
                      ->add('title')
                      ->add('content')
                      ->add('image')
-                     ->getForm();
-        
+                     ->getForm(); */
+
+        $form =$this->createForm(ArticleType::class, $article);
+
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid())
