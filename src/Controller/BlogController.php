@@ -32,6 +32,25 @@ class BlogController extends AbstractController
     }
 
     /**
+     * @Route("/blog/new", name="blog_create")
+     */
+    public function create()
+    {
+        $article = new Article();
+
+        return $this->render('blog/create.html.twig', [
+            //Permet d'afficher le nom du contrôlleur
+            'controller_name' => 'BlogController',
+            //Permet d'avoir le link de la navbar en active
+            'current_menu' => 'blog',
+            //Variable pour le titre
+            'title' => 'Création article',
+            //Titre de l'application
+            'appName' => 'StarterKit Symfony 4'
+        ]);
+    }
+
+    /**
      * @Route("/blog/{id}", name="blog_show")
      */
     public function show(Article $article)
