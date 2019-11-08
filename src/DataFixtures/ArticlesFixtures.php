@@ -13,7 +13,7 @@ class ArticlesFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $faker = Faker\Factory::create('FR_fr');
+        $faker = \Faker\Factory::create('fr_FR');
 
         for ($i = 1; $i <= 3; $i++)
         {
@@ -23,7 +23,7 @@ class ArticlesFixtures extends Fixture
 
             $manager->persist($category);
 
-            $content =  '<p>' . join($faker->paragraphs(5), '</p><p>') . '</p>';
+            $content =  '<p>' . join($faker->paragraphs(4), '</p><p>') . '</p>';
 
         for ($j = 1; $j <= mt_rand(4, 6); $j++) {
             $article = new Article();

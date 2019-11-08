@@ -20,7 +20,7 @@
         <hr>
 
         <!-- Date/Time -->
-        <p>Créer le {{ article.createAt | date('d/m/Y') }} à {{ article.createAt | date('H:i') }} | Tags</p>
+        <p>Créer le {{ article.createAt | date('d/m/Y') }} à {{ article.createAt | date('H:i') }} Catégorie {{ article.category.title }}</p>
         <hr>
 
         <!-- Preview Image -->
@@ -29,16 +29,15 @@
         <hr>
 
         <!-- Post Content -->
-        <p class="lead">{{ article.content }}</p>
+        <p class="lead">{{ article.content | raw}}</p>
 
         <blockquote class="blockquote">
-        <p class="mb-0">{{ article.content }}</p>
-            <footer class="blockquote-footer">{{ article.content }}
+        <p class="mb-0"></p>
+            <footer class="blockquote-footer">
         <cite title="Source Title">Source Title</cite>
             </footer>
         </blockquote>
-        <p>{{ article.content }}</p>
-        <p>{{ article.content }}</p>
+        <p></p>
         <hr>
         <!-- Comments Form -->
         <div class="card my-4">
@@ -53,14 +52,17 @@
             </div>
         </div>
 
-        <!-- Single Comment -->
-        <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-            <div class="media-body">
-                <h5 class="mt-0">Commenter Name</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-            </div>
+<!-- Single Comment -->
+        {% for comment in article.comments %}
+            <div class="media mb-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <div class="media-body">
+                    <h5 class="mt-0">{{ comment.author }} {{ comment.createAt | date('d/m/Y à H:i')}}</h5>
+                <p>{{ comment.content | raw}}</p>
+                </div>
         </div>
+        {% endfor %}
+
 
         <!-- Comment with nested comments -->
         <div class="media mb-4">
