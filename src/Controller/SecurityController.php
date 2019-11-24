@@ -73,6 +73,6 @@ class SecurityController extends Controller
      */
     public function logout()
     {
-        
+        return $this->redirectToRoute('/');
     }
 }
